@@ -14,7 +14,8 @@ import (
 func TestGolden(t *testing.T) {
 	got, err := genXlsx()
 	assert.NoError(t, err)
-	gotContent, err := io.ReadAll(got)
+
+	b, err := io.ReadAll(got)
 	assert.NoError(t, err)
 
 	equalFn := func(actual, expected []byte) bool {
@@ -60,5 +61,5 @@ func TestGolden(t *testing.T) {
 		}),
 		goldie.WithEqualFn(equalFn),
 	)
-	g.Assert(t, t.Name(), gotContent)
+	g.Assert(t, t.Name(), b)
 }
